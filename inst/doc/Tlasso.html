@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng." />
+
+<meta name="date" content="2016-09-18" />
+
+<title>Package Tlasso</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+</style>
+
+
+<link href="data:text/css,body%20%7B%0A%20%20background%2Dcolor%3A%20%23fff%3B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20max%2Dwidth%3A%20700px%3B%0A%20%20overflow%3A%20visible%3B%0A%20%20padding%2Dleft%3A%202em%3B%0A%20%20padding%2Dright%3A%202em%3B%0A%20%20font%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0A%20%20font%2Dsize%3A%2014px%3B%0A%20%20line%2Dheight%3A%201%2E35%3B%0A%7D%0A%0A%23header%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0A%0A%23TOC%20%7B%0A%20%20clear%3A%20both%3B%0A%20%20margin%3A%200%200%2010px%2010px%3B%0A%20%20padding%3A%204px%3B%0A%20%20width%3A%20400px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20border%2Dradius%3A%205px%3B%0A%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20font%2Dsize%3A%2013px%3B%0A%20%20line%2Dheight%3A%201%2E3%3B%0A%7D%0A%20%20%23TOC%20%2Etoctitle%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%20%20font%2Dsize%3A%2015px%3B%0A%20%20%20%20margin%2Dleft%3A%205px%3B%0A%20%20%7D%0A%0A%20%20%23TOC%20ul%20%7B%0A%20%20%20%20padding%2Dleft%3A%2040px%3B%0A%20%20%20%20margin%2Dleft%3A%20%2D1%2E5em%3B%0A%20%20%20%20margin%2Dtop%3A%205px%3B%0A%20%20%20%20margin%2Dbottom%3A%205px%3B%0A%20%20%7D%0A%20%20%23TOC%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dleft%3A%20%2D2em%3B%0A%20%20%7D%0A%20%20%23TOC%20li%20%7B%0A%20%20%20%20line%2Dheight%3A%2016px%3B%0A%20%20%7D%0A%0Atable%20%7B%0A%20%20margin%3A%201em%20auto%3B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dcolor%3A%20%23DDDDDD%3B%0A%20%20border%2Dstyle%3A%20outset%3B%0A%20%20border%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0A%20%20border%2Dwidth%3A%202px%3B%0A%20%20padding%3A%205px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0A%20%20border%2Dwidth%3A%201px%3B%0A%20%20border%2Dstyle%3A%20inset%3B%0A%20%20line%2Dheight%3A%2018px%3B%0A%20%20padding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0A%20%20border%2Dleft%2Dstyle%3A%20none%3B%0A%20%20border%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Ap%20%7B%0A%20%20margin%3A%200%2E5em%200%3B%0A%7D%0A%0Ablockquote%20%7B%0A%20%20background%2Dcolor%3A%20%23f6f6f6%3B%0A%20%20padding%3A%200%2E25em%200%2E75em%3B%0A%7D%0A%0Ahr%20%7B%0A%20%20border%2Dstyle%3A%20solid%3B%0A%20%20border%3A%20none%3B%0A%20%20border%2Dtop%3A%201px%20solid%20%23777%3B%0A%20%20margin%3A%2028px%200%3B%0A%7D%0A%0Adl%20%7B%0A%20%20margin%2Dleft%3A%200%3B%0A%7D%0A%20%20dl%20dd%20%7B%0A%20%20%20%20margin%2Dbottom%3A%2013px%3B%0A%20%20%20%20margin%2Dleft%3A%2013px%3B%0A%20%20%7D%0A%20%20dl%20dt%20%7B%0A%20%20%20%20font%2Dweight%3A%20bold%3B%0A%20%20%7D%0A%0Aul%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%7D%0A%20%20ul%20li%20%7B%0A%20%20%20%20list%2Dstyle%3A%20circle%20outside%3B%0A%20%20%7D%0A%20%20ul%20ul%20%7B%0A%20%20%20%20margin%2Dbottom%3A%200%3B%0A%20%20%7D%0A%0Apre%2C%20code%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20color%3A%20%23333%3B%0A%20%20white%2Dspace%3A%20pre%2Dwrap%3B%20%20%20%20%2F%2A%20Wrap%20long%20lines%20%2A%2F%0A%7D%0Apre%20%7B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20margin%3A%205px%200px%2010px%200px%3B%0A%20%20padding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0A%20%20background%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0A%0Acode%20%7B%0A%20%20font%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0A%20%20font%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0A%20%20padding%3A%202px%200px%3B%0A%7D%0A%0Adiv%2Efigure%20%7B%0A%20%20text%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0A%20%20background%2Dcolor%3A%20%23FFFFFF%3B%0A%20%20padding%3A%202px%3B%0A%20%20border%3A%201px%20solid%20%23DDDDDD%3B%0A%20%20border%2Dradius%3A%203px%3B%0A%20%20border%3A%201px%20solid%20%23CCCCCC%3B%0A%20%20margin%3A%200%205px%3B%0A%7D%0A%0Ah1%20%7B%0A%20%20margin%2Dtop%3A%200%3B%0A%20%20font%2Dsize%3A%2035px%3B%0A%20%20line%2Dheight%3A%2040px%3B%0A%7D%0A%0Ah2%20%7B%0A%20%20border%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20padding%2Dbottom%3A%202px%3B%0A%20%20font%2Dsize%3A%20145%25%3B%0A%7D%0A%0Ah3%20%7B%0A%20%20border%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0A%20%20padding%2Dtop%3A%2010px%3B%0A%20%20font%2Dsize%3A%20120%25%3B%0A%7D%0A%0Ah4%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0A%20%20margin%2Dleft%3A%208px%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Ah5%2C%20h6%20%7B%0A%20%20border%2Dbottom%3A%201px%20solid%20%23ccc%3B%0A%20%20font%2Dsize%3A%20105%25%3B%0A%7D%0A%0Aa%20%7B%0A%20%20color%3A%20%230033dd%3B%0A%20%20text%2Ddecoration%3A%20none%3B%0A%7D%0A%20%20a%3Ahover%20%7B%0A%20%20%20%20color%3A%20%236666ff%3B%20%7D%0A%20%20a%3Avisited%20%7B%0A%20%20%20%20color%3A%20%23800080%3B%20%7D%0A%20%20a%3Avisited%3Ahover%20%7B%0A%20%20%20%20color%3A%20%23BB00BB%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%20%20a%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0A%20%20%20%20text%2Ddecoration%3A%20underline%3B%20%7D%0A%0A%2F%2A%20Class%20described%20in%20https%3A%2F%2Fbenjeffrey%2Ecom%2Fposts%2Fpandoc%2Dsyntax%2Dhighlighting%2Dcss%0A%20%20%20Colours%20from%20https%3A%2F%2Fgist%2Egithub%2Ecom%2Frobsimmons%2F1172277%20%2A%2F%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Keyword%20%2A%2F%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%2F%2A%20DataType%20%2A%2F%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%2F%2A%20DecVal%20%28decimal%20values%29%20%2A%2F%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20BaseN%20%2A%2F%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Float%20%2A%2F%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20Char%20%2A%2F%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%2F%2A%20String%20%2A%2F%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%2F%2A%20Comment%20%2A%2F%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%2F%2A%20OtherToken%20%2A%2F%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20AlertToken%20%2A%2F%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%2F%2A%20Function%20calls%20%2A%2F%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%2F%2A%20ErrorTok%20%2A%2F%0A%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+<div class="fluid-row" id="header">
+
+
+<h1 class="title">Package “Tlasso”</h1>
+<h4 class="author"><em>Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.</em></h4>
+<h4 class="date"><em>2016-09-18</em></h4>
+
+</div>
+
+
+<p><a id="top"></a></p>
+<blockquote>
+<p><a href="#basic">Basic Info</a></p>
+</blockquote>
+<blockquote>
+<p><a href="#method">Methodology</a></p>
+</blockquote>
+<blockquote>
+<p><a href="#func">Functions</a></p>
+</blockquote>
+<blockquote>
+<p><a href="#quick">Quick Start</a></p>
+</blockquote>
+<blockquote>
+<p><a href="#ref">Reference</a></p>
+</blockquote>
+<p><a id="basic"></a></p>
+<div id="basic-info" class="section level2">
+<h2>Basic Info</h2>
+<p>This package considers the estimation and inference of sparse graphical models that characterize the dependency structure of high-dimensional tensor-valued data. Data are assumed to follow a tensor normal distribution whose covariance has a Kronecker product structure. For estimation, this package provides an alternating minimization algorithm, which iteratively estimates each sparse precision matrix while fixing the others, and attains an estimator with the optimal statistical rate of convergence. Notably, such an estimator achieves estimation consistency with only one tensor sample, which is unobserved in previous work. For inference, this package provides a large-scale multiple testing method for support recovery of sparse precision matrix. A FDR control procedure can be easily implmented into the inference. Test consistency and FDR convergence achieves with only two tensor samples.</p>
+<p><a id="method"></a></p>
+</div>
+<div id="methodology" class="section level2">
+<h2>Methodology</h2>
+<div id="estimation-tlasso-algorithm.-sun-et-al.-20163" class="section level3">
+<h3>Estimation: Tlasso Algorithm. <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a></h3>
+<p>A tensor <span class="math">\({\cal T} \in \mathbb R^{m_1 \times m_2 \times \cdots \times m_K}\)</span> follows the tensor normal distribution with zero mean and covariance matrices <span class="math">\(\bf{\Sigma}_1, \ldots, \bf{\Sigma}_K\)</span>, denoted as <span class="math">\({\cal T} \sim \textrm{TN}({\bf0}; \bf{\Sigma}_1, \ldots, \bf{\Sigma}_K)\)</span>, if its probability density function is <span class="math">\[
+p({\cal T}| \bf{\Sigma}_1,\ldots,\bf{\Sigma}_K) = (2\pi)^{-m/2} \biggl\{ \prod_{k=1}^K |\bf{\Sigma}_k|^{-m/(2m_k)}  \biggr\} \exp \big(- \|{\cal T} \times \bf{\Sigma}^{-1/2}\|_F^2/2 \big),
+\]</span> where <span class="math">\(m = \prod_{k=1}^K m_k\)</span> and <span class="math">\(\bf{\Sigma}^{-1/2} := \{\bf{\Sigma}_1^{-1/2},\ldots,\bf{\Sigma}_K^{-1/2}\}\)</span>.</p>
+<p>A standard approach to estimate precision matrix <span class="math">\(\bf{\Omega}_k^*\)</span>, <span class="math">\(k=1,\ldots,K\)</span>, is to use the maximum likelihood method. Up to a constant, the negative log-likelihood function of the tensor normal distribution is <span class="math">\[
+\ell(\bf{\Omega}_1, \ldots, \bf{\Omega}_K) := \frac{1}{2}\textrm{tr}[\bf{S} (\bf{\Omega}_K \otimes \cdots \otimes \bf{\Omega}_1)] - \frac{1}{2}\sum_{k=1}^K \frac{m}{m_k} \log |\bf{\Omega}_k|,
+\]</span> where <span class="math">\(\bf{S} := \frac{1}{n} \sum_{i=1}^n \textrm{vec}({\cal T}_i) \textrm{vec}({\cal T}_i)^{\top}\)</span>. To encourage the sparsity of each precision matrix in the high-dimensional scenario, a penalized log-likelihood estimator is proposed which minimizes <span class="math">\[
+q_n(\bf{\Omega}_1, \ldots, \bf{\Omega}_K) :=  \frac{1}{m}\textrm{tr}[\bf{S} (\bf{\Omega}_K \otimes \cdots \otimes \bf{\Omega}_1)] - \sum_{k=1}^K \frac{1}{m_k} \log |\bf{\Omega}_k| + \sum_{k=1}^K P_{\lambda_k}(\bf{\Omega}_k),
+\]</span> where <span class="math">\(P_{\lambda_k}(\bf{\Omega}_k) = \lambda_k \sum_{i\ne j} |[\bf{\Omega}_{k}]_{i,j}|\)</span> is penalty function and <span class="math">\(\lambda_k\)</span> is tuning parameter.</p>
+<p><span class="math">\(q_n(\bf{\Omega}_1, \ldots, \bf{\Omega}_K)\)</span> is jointly non-convex with respect to <span class="math">\(\bf{\Omega}_1, \ldots, \bf{\Omega}_K\)</span>. Nevertheless, <span class="math">\(q_n(\bf{\Omega}_1, \ldots, \bf{\Omega}_K)\)</span> is bi-convex problem since <span class="math">\(q_n(\bf{\Omega}_1, \ldots, \bf{\Omega}_K)\)</span> is convex in <span class="math">\(\bf{\Omega}_k\)</span> when the rest <span class="math">\(K-1\)</span> precision matrices are fixed. According to its bi-convex property, this package solves this non-convex problem by alternatively update one precision matrix with other matrices fixed. Note that, for any <span class="math">\(k = 1,\ldots, K\)</span>, minimizing <span class="math">\(q_n(\bf{\Omega}_1, \ldots, \bf{\Omega}_K)\)</span> with respect to <span class="math">\(\bf{\Omega}_k\)</span> while fixing the rest <span class="math">\(K-1\)</span> precision matrices is equivalent to minimizing <span class="math">\[
+L(\bf{\Omega}_k) :=  \frac{1}{m_k}\textrm{tr}(\bf{S}_k \bf{\Omega}_k) - \frac{1}{m_k} \log |\bf{\Omega}_k| + \lambda_k \|\bf{\Omega}_k\|_{1,\textrm{off}}. 
+\]</span> Here <span class="math">\(\bf{S}_k := \frac{m_k}{n m}\sum_{i=1}^n \bf{V}_i^k \bf{V}_i^{k\top}\)</span>, where <span class="math">\(\bf{V}_i^k := \big[ {\cal T}_i \times \big\{\bf{\Omega}_1^{1/2},\ldots,\bf{\Omega}_{k-1}^{1/2}, 1_{m_k}, \bf{\Omega}_{k+1}^{1/2},\ldots,\bf{\Omega}_{K}^{1/2} \big\} \big]_{(k)}\)</span> with <span class="math">\(\times\)</span> the tensor product operation and <span class="math">\([\cdot]_{(k)}\)</span> the mode-<span class="math">\(k\)</span> matricization operation defined in . Note that minimizing <span class="math">\(L(\bf{\Omega}_k)\)</span> corresponds to estimating vector-valued Gaussian graphical model and can be solved efficiently via the glasso algorithm <a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3019769/">Friedman et al. (2008)</a>. See <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a> for detailed algorithm, named <strong>Tlasso</strong>.</p>
+</div>
+<div id="inference" class="section level3">
+<h3>Inference:</h3>
+<p>Multiple testing method is established to testing the entries of precision matrix for each way of the tensor, <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a>. We focus on <span class="math">\(\bf{\Omega}_1^*\)</span>, and procedures on the rest <span class="math">\(K-1\)</span> precision matrices are symmetric. Hypothesis for <span class="math">\(\bf{\Omega}_1^*\)</span> is, <span class="math">\(\forall \,1 \le i &lt; j \le m_1\)</span>, <span class="math">\[
+H_{0 1 , i j } : \;  [{\bf{\Omega}}_1^*]_{i,j} =0  \quad\quad \textrm{vs} \quad\quad H_{11 , ij} : \;  [\bf{\Omega}_1^*]_{i,j} \ne  0 
+\]</span></p>
+<p>Let index <span class="math">\(-i\)</span> in <span class="math">\(k\)</span>-th mode denote all elements of mode-<span class="math">\(k\)</span> except the <span class="math">\(i\)</span>-th one. From the distribution of <span class="math">\({\cal T }_{: , i_2 , \ldots , i_K}\)</span>, we have, for every <span class="math">\(i_k \in \{ 1 , \ldots , m_k\}\)</span>, <span class="math">\(k \in \{ 1 , \ldots , K\}\)</span>, <span class="math">\({\cal T}_{i_1 , i_2 , \ldots , i_K} | {\cal T}_{-i_1 , i_2 , \ldots , i_K} \sim \textrm{N} ( - [\bf{\Omega}_1^*]_{i_1,i_1}^{-1} [\bf{\Omega}_1^*]_{i_1, - i_1} {\cal T}_{-i_1 , i_2 , \ldots , i_K} ; [\bf{\Omega}_1^*]_{i_1, i_1 }^{-1} \prod_{k=2}^K[\bf{\Sigma}_k^*]_{i_k, i_k} )\)</span>. An equivalent linear model is <span class="math">\[
+{\cal T }_{l ; i_1, i_2 , \ldots , i_K} = {\cal T }_{l ; - i_1, i_2 , \ldots , i_K}^\top \bf{\theta}_{i_1} + \xi_{l ; i_1, i_2 , \ldots , i_K},  \forall \, l \in \{ 1 , \ldots , n \} 
+\]</span> where <span class="math">\(\bf{\theta}_{i_1} = - [\bf{\Omega}_1^*]_{i_1,i_1}^{-1} [\bf{\Omega}_1^*]_{i_1, - i_1} \text{ , and }\, \xi_{l ;i_1, i_2 , \ldots , i_K} \sim \textrm{N} (0 \, ; [\bf{\Omega}_1^*]_{i_1, i_1 }^{-1} \prod_{k=2}^K [\bf{\Sigma}_k^*]_{i_k, i_k}).\)</span> Note that intercept term is eliminated since zero mean of <span class="math">\({\cal T }_{: , i_2 , \ldots , i_K}\)</span>.</p>
+<p>Test statistic is constructed by both bias and variance correction of sample covariance of residuals. Let <span class="math">\(\hat{\bf{\theta}}_{i_1} = (\hat{\theta}_{1, i_1} , \ldots , \hat{\theta}_{m_1-1, i_1})^\top = - [\hat{\bf{\Omega}}_1]_{i_1,i_1}^{-1} [\hat{\bf{\Omega}}_1]_{i_1, - i_1}\)</span> be the estimator of <span class="math">\(\bf{\theta}_{i_1}\)</span>, where <span class="math">\(\hat{\bf{\Omega}}_1\)</span> is the output of <strong>Tlasso</strong> Algorithm. Given <span class="math">\(\{ \hat{\bf{\theta}}_{i_1} \}_{i_1 = 1 }^{m_1}\)</span>, the residual of the linear model is defined as <span class="math">\[
+\hat{\xi}_{l ; i_1, i_2 , \ldots , i_K} = {\cal T }_{l ; i_1, i_2 , \ldots , i_K} - \bar{{\cal T }}_{ i_1, i_2 , \ldots , i_K} - ( {\cal T }_{l ; - i_1, i_2 , \ldots , i_K} - \bar{{\cal T }}_{ - i_1, i_2 , \ldots , i_K} )^\top \hat{\bf{\theta}}_{i_1},
+\]</span> where <span class="math">\(\bar{{\cal T }} = \frac{1}{n}\sum \limits_{l=1}^{n} {\cal T }_{l }\)</span>. The sample covariance of residuals is<br /><span class="math">\[
+\hat{\varrho}_{i,j}= \frac{m_1}{(n-1) m } \sum \limits_{l=1}^{n} \sum \limits_{i_2=1}^{m_2} \cdots \sum \limits_{i_K=1}^{m_K}  \hat{\xi}_{l ; i, i_2 , \ldots , i_K} \hat{\xi}_{l ; j, i_2 , \ldots , i_K} .
+\]</span> Test statistic is <span class="math">\[\tau_{i,j} = \frac{\hat{\varrho}_{i.j} + \mu_{i,j}}{\varpi}, \forall 1 \le i &lt; j \le m_1.\]</span> The bias correction term <span class="math">\(\mu_{i,j}=\hat{\varrho}_{i,i} \hat{\theta}_{i , j} + \hat{\varrho}_{j,j} \hat{\theta}_{j-1, i}\)</span> translates the mean of <span class="math">\(\tau_{i,j}\)</span> to zero under <span class="math">\(H_{01, ij}\)</span>. The variance correction term <span class="math">\[
+\varpi^2 =  \frac{m \cdot \|\widehat{\bf{S}}_2\|_F^2 \cdots \|\widehat{\bf{S}}_K\|_F^2}{m_1 \cdot (\textrm{tr}(\widehat{\bf{S}}_2))^2 \cdots (\textrm{tr}(\widehat{\bf{S}}_K))^2}, 
+\]</span> plays a significant role in rescaling <span class="math">\(\tau_{i,j}\)</span> into an asymptotic standard normal distribution, where $ <em>k :=  </em>{i=1}^n _i _i^{} $ is the estimate of <span class="math">\(\bf{\Sigma}_k\)</span> with <span class="math">\(\widehat{\bf{V}}_i := \big[ {\cal T}_i \times \bigl\{\widehat{\bf{\Omega}}_1^{1/2},\ldots,\widehat{\bf{\Omega}}_{k-1}^{1/2}, 1_{m_k}, \widehat{\bf{\Omega}}_{k+1}^{1/2},\ldots,\widehat{\bf{\Omega}}_{K}^{1/2} \bigr\} \big]_{(k)}\)</span> and <span class="math">\(\widehat{\bf{\Omega}}_{k}\)</span> from <strong>Tlasso</strong> Algorithm, <span class="math">\(k \in \{2 , \ldots , K \}\)</span>. <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016()</a> proves that, under certain conditions, <span class="math">\[ \sqrt{\frac{(n-1) m  }{ m_1 \hat{\varrho}_{i,i} \hat{\varrho}_{j,j} }} \tau_{i,j}  \rightarrow \textrm{N} ( 0 ;1 ) \]</span> in distribution, as <span class="math">\(nm/m_1 \rightarrow \infty\)</span>.</p>
+<p>Let <span class="math">\(\tilde{\tau}_{i,j}= \sqrt{(n-1) m/ (m_1\hat{\varrho}_{i,i} \hat{\varrho}_{j,j}) } \tau_{i,j}\)</span>. Given the values of <span class="math">\(\tilde{\tau}_{ij}\)</span> and thresholding level <span class="math">\(\varsigma\)</span>, we define a test procedure <span class="math">\(\varphi_{\varsigma} (\tilde{\tau}_{i,j})= 1 \{ |\tilde{\tau}_{i,j}| \ge \varsigma \}\)</span> and reject <span class="math">\(H_{01, ij}\)</span> if <span class="math">\(\varphi_{\varsigma} (\tilde{\tau}_{i,j})=1\)</span>. The definition of FDR/FDP in our notation is <span class="math">\[
+\textrm{FDP} = \frac{| \{ (i,j) \in {\cal H}_0 : \varphi_{\varsigma} (\tilde{\tau}_{i,j})=1 \} | }{ | \{ (i,j)  : 1 \le i &lt; j \le m_1, \varphi_{\varsigma} (\tilde{\tau}_{i,j})=1 \} |  \vee 1 } \, \text{ , and } \,\textrm{FDR} = \bf{E} (\textrm{FDP}).
+\]</span> where <span class="math">\({\cal H}_0 = \{ (i,j) : [\bf{\Omega}_1^*]_{i,j} = 0 , 1 \le i &lt; j \le m_1 \}\)</span>. To recover the support of <span class="math">\(\bf{\Omega}_1^*\)</span>, <span class="math">\((m_1-1)m_1/2\)</span> tests are simultaneously conducted. Hence, a small enough <span class="math">\(\varsigma\)</span> that enhances power while controls FDP under a pre-specific level <span class="math">\(\upsilon \in (0,1)\)</span> is an ideal choice. In particular, <span class="math">\(\varsigma_{*} = \inf \{ \varsigma &gt; 0: \text{FDP} \le \upsilon \}\)</span>. However, <span class="math">\(\varsigma_*\)</span> is oracle since we have no access to the information of <span class="math">\({\cal H}_0\)</span>. Due to sparsity, <span class="math">\(w_0 =|{\cal H}_0|\)</span> can be approximated by <span class="math">\(w= m_1(m_1 -1 )/2\)</span>. <span class="math">\(P(\varphi_{\varsigma} (\tilde{\tau}_{i,j})=1)\)</span> is close to <span class="math">\(2(1 - \Phi( \varsigma))\)</span> by test consistency. The approximation of <span class="math">\(\varsigma_*\)</span> is <span class="math">\[
+\hat{\varsigma}= \inf \bigg \{   \varsigma &gt; 0: \frac{2(1-\Phi( \varsigma )) w}{  | \{ (i,j)  : 1 \le i &lt; j \le m_1,  \varphi_{\varsigma} (\tilde{\tau}_{i,j})=1 \} | \vee 1 } \le \upsilon  \bigg \}.
+\]</span></p>
+<p>FDR/FDP control procedure is to infer the support of <span class="math">\(\bf{\Omega}_1^*\)</span> at thresholding level <span class="math">\(\hat{\varsigma}\)</span>. In particular, FDR and FDP in the procedure are <span class="math">\[
+\textrm{FDP}_1 = \frac{| \{ (i,j) \in {\cal H}_0 : \varphi_{\hat{\varsigma}} (\tilde{\tau}_{i,j})=1 \} | }{ | \{ (i,j)  : 1 \le i &lt; j \le m_1, \varphi_{\hat{\varsigma}} (\tilde{\tau}_{i,j})=1 \} | \vee 1 } \text{ , and } \,\textrm{FDR}_1 = \bf{E} (\textrm{FDP}_1). 
+\]</span> Note that we set <span class="math">\(\tilde{\tau}_{i,j} = \tilde{\tau}_{j,i}\)</span> for <span class="math">\(1 \le i &lt; j \le m_1\)</span>. The inference of <span class="math">\(\textrm{supp}(\bf{\Omega}_k^*) , \, k \in \{2 , \ldots , K \}\)</span>, is a symmetric procedure.</p>
+<p><a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a> gives the asymptotic control of <span class="math">\(\text{FDP}_1\)</span> and <span class="math">\(\text{FDR}_1\)</span> for the support of <span class="math">\(\bf{\Omega}_{1}^*\)</span>: under certain conditions, <span class="math">\[\textrm{FDP}_1 w / \upsilon w_0 \rightarrow 1 , \; \textrm{FDR}_1  w / \upsilon w_0 \rightarrow 1 \]</span> in probability as <span class="math">\(nm/m_1 \rightarrow \infty\)</span>.</p>
+<p><a href="#top">Back to Top</a></p>
+<p><a id="func"></a></p>
+</div>
+</div>
+<div id="functions" class="section level2">
+<h2>Functions</h2>
+<p>This packages contains following functions:</p>
+<ol style="list-style-type: decimal">
+<li><dl>
+<dt><code>ChainOmega</code></dt>
+<dd>This function generates precision matrix of triangle graph (chain like network) following the set-up in <a href="http://arxiv.org/abs/0908.2053">Fan et al. (2009)</a>. It first constructs a covariance matrix <span class="math">\(\Sigma\)</span> that its (i,j) entry is <span class="math">\(\exp (- | h_i - h_j |/2)\)</span> with <span class="math">\(h_1 &lt; h_2 &lt; \ldots &lt; h_p\)</span>. The difference <span class="math">\(h_i - h_{i+1}\)</span> is generated i.i.d. from Unif(0.5,1). See <a href="http://arxiv.org/abs/0908.2053">Fan et al. (2009)</a> for more details.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>NeighborOmega</code></dt>
+<dd>This function generates precision matrix of nearest neighbor network following the set-up in <a href="http://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with">Li and Gui (2006)</a> and <a href="http://jmlr.org/papers/v16/lee15a.html">Lee and Liu (2006)</a>. For a <code>knn</code> nearest-neighbor graph, this function first randomly picks p points from a unit square and computes all pairwise distances among the points. Then it searches for the knn nearest-neighbors of each point and a pair of symmetric entries in the precision matrix that has a random chosen value from <span class="math">\([-1, -0.5] \cup [0.5, 1]\)</span>. Finally, to ensure positive definite property, it normalizes the matrix as <span class="math">\(\Omega &lt;- \Omega + (\lambda_{\min} (\Omega) + 0.2 ) 1_p\)</span> where <span class="math">\(\lambda_{\min} (\cdot )\)</span> refers to the samllest eigenvalue.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>Trnorm</code></dt>
+<dd>This function generates obeservations from separable tensor normal distribution and returns a <span class="math">\(m_1 * \ldots * m_K * n\)</span> array. If <code>Sigma.list</code> is not given, default distribution is from either triangle graph or nearest-neighbor graph (depends on <code>type</code>).
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>Tlasso.fit</code></dt>
+<dd>This function conducts an alternating optimization algorithm to precision matrices of sparse tensor graphical models. The output is optimal consistent even when <span class="math">\(T=1\)</span>, see <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a> for details. There are two ternimation criteria, <code>T</code> and <code>thres</code>. Algorithm will be terminated if output in certain iteration change less than <code>thres</code>. Otherwise, T iterations will be fully operated.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>covres</code></dt>
+<dd>This function generates sample covariance matrix of residuals (includes diagnoal) and is the basis for support recovery procedure, see <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a>. Note that output matrix includes diagnoal while bias corrected matrix (output of <code>biascor</code>) for inference is off-diagnoal. Elements in Omega.list are true precision matrices or estimation of the true ones, the latter can be output of <code>Tlasso.fit</code>.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>biascor</code></dt>
+<dd>This function computes bias corrected sample covariance matrix of residuals (excludes diagnoal, diagnoal is zero vector). Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a> for details. Elements in <code>Omega.list</code> are true precision matrices or estimation of the true ones, the latter can be output of <code>Tlasso.fit</code>.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>varcor</code></dt>
+<dd>This function computes variance correction term of sample covariance of residuals and is utilized to normalize test statistic into standord normal, see <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a> for details.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>est.analysis</code></dt>
+<dd>This function generates a list of performance measures of optimazation for sparse tensor graphical models, i.e., estimation errors and model selection consistency. Errors are measured in Frobenius norm and Max norm. Model selection measures are TPR and TNR. All these measures are computed in each mode, average across all modes, and kronecker production of precision matrices.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>infer.analysis</code></dt>
+<dd>This function computes performance measures of inference for sparse tensor graphical models. False positive, false negative, discovery (number of rejected null hypothesis), non-discovery (number of non-rejected null hypothesis), and total non-zero entries of each true precision matrix is listed in output.
+</dd>
+</dl></li>
+<li><dl>
+<dt><code>graph.pattern</code></dt>
+<dd>This function draws an undirected graph based on presicion matrix to present connection among variables. If an entry is zero, then no edge is connected between corresponding pair of nodes.
+</dd>
+</dl></li>
+</ol>
+<p><a href="#top">Back to Top</a></p>
+<p><a id="quick"></a></p>
+</div>
+<div id="quick-start" class="section level2">
+<h2>Quick Start</h2>
+<p>The purpose of this section is to show users the basic usage of this package. We will briefly go through main functions, see what they can do and have a look at outputs. An detailed example of complete procedures of estimation and inference will be presented to give users a general sense of the pakcage.</p>
+<p>First, we load <code>Tlasso</code> package:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Tlasso)</code></pre>
+<p>Then, we generate a list of precision matrices of triangle graph.</p>
+<pre class="sourceCode r"><code class="sourceCode r">m.vec =<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>)  <span class="co"># dimensionality of a tensor </span>
+<span class="co"># m1, m2, m3</span>
+n =<span class="st"> </span><span class="dv">5</span>   <span class="co"># sample size </span>
+
+Omega.true.list =<span class="st"> </span><span class="kw">list</span>()
+for (k in <span class="dv">1</span>:<span class="kw">length</span>(m.vec)) {
+  Omega.true.list[[k]] =<span class="st"> </span><span class="kw">ChainOmega</span>(m.vec[k], <span class="dt">sd =</span> k)
+}
+
+Omega.true.list[[<span class="dv">1</span>]]</code></pre>
+<pre><code>##            [,1]       [,2]       [,3]       [,4]       [,5]
+## [1,]  0.3168143 -0.2308893  0.0000000  0.0000000  0.0000000
+## [2,] -0.2308893  0.4674875 -0.2123306  0.0000000  0.0000000
+## [3,]  0.0000000 -0.2123306  0.4234692 -0.1841058  0.0000000
+## [4,]  0.0000000  0.0000000 -0.1841058  0.3658496 -0.1499391
+## [5,]  0.0000000  0.0000000  0.0000000 -0.1499391  0.2415995</code></pre>
+<p><code>ChainOmega</code> returns a precision matrix of triangle graph with dimension <code>m.vec[k]</code> and seed number <code>k</code>. Given precision matrices, we generate obervations from corresponding tensor normal distribution.</p>
+<pre class="sourceCode r"><code class="sourceCode r">Sigma.true.list =<span class="st"> </span><span class="kw">list</span>()
+for (k in <span class="dv">1</span>:<span class="kw">length</span>(m.vec)) {
+  Sigma.true.list[[k]] =<span class="st"> </span><span class="kw">solve</span>(Omega.true.list[[k]])
+} <span class="co"># generate covariance matrices list</span>
+
+DATA=<span class="kw">Trnorm</span>(n,m.vec,<span class="dt">Sigma.list=</span>Sigma.true.list) 
+<span class="co"># obersavations from tensor normal distribution</span></code></pre>
+<p><code>Trnorm</code> generates observations from separable tensor normal distribution with covariance matrix <code>Sigma.list[[k]]</code> for kth mode. <code>DATA</code> is a <span class="math">\(m_1 * m_2 * m_3 * n\)</span> array, i.e, a <span class="math">\(10 \times 10 \times 10 \times 10\)</span> array. Default distribution is from triangle graph or 4 near-neighbor graph (depends on <code>type</code>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">DATA2=<span class="kw">Trnorm</span>(n,m.vec)
+<span class="co"># default is triangle graph </span>
+<span class="co"># equivalent to DATA2 = Trnorm(n,m.vec, type='Chain', sd=1)</span>
+DATA3=<span class="kw">Trnorm</span>(n,m.vec,<span class="dt">type=</span><span class="st">'Neighbor'</span>)
+<span class="co"># 4 nearest-neighbor graph</span>
+<span class="co"># equivalent to DATA3 = Trnorm(n,m.vec, type='Neighbor', sd=1, knn=4)</span></code></pre>
+<p>Given observations <code>DATA</code>, we use <code>Tlasso.fit</code> to conduct alternating optimization.</p>
+<pre class="sourceCode r"><code class="sourceCode r">lambda.thm =<span class="st"> </span><span class="dv">20</span>*<span class="kw">c</span>( <span class="kw">sqrt</span>(<span class="kw">log</span>(m.vec[<span class="dv">1</span>])/(n*<span class="kw">prod</span>(m.vec))), 
+                   <span class="kw">sqrt</span>(<span class="kw">log</span>(m.vec[<span class="dv">2</span>])/(n*<span class="kw">prod</span>(m.vec))), 
+                   <span class="kw">sqrt</span>(<span class="kw">log</span>(m.vec[<span class="dv">3</span>])/(n*<span class="kw">prod</span>(m.vec))))
+<span class="co"># lambda.thm is regularization parameter</span>
+out.tlasso =<span class="st"> </span><span class="kw">Tlasso.fit</span>(DATA,<span class="dt">T=</span><span class="dv">1</span>,<span class="dt">lambda.vec =</span> lambda.thm)   
+<span class="co"># output is a list of estimation of precision matrices</span>
+out.tlasso[[<span class="dv">1</span>]]</code></pre>
+<pre><code>##              [,1]        [,2]         [,3]        [,4]        [,5]
+## [1,]  0.361422637 -0.23704270  0.002333856 -0.06126152  0.01539202
+## [2,] -0.237046526  0.46822624 -0.192384949 -0.05154091  0.05256162
+## [3,]  0.002304876 -0.19236551  0.424993048 -0.17817458 -0.07814616
+## [4,] -0.061257515 -0.05155747 -0.178173408  0.37108685 -0.08295747
+## [5,]  0.015405071  0.05255995 -0.078142842 -0.08296053  0.19265707</code></pre>
+<p><code>Tlasso.fit</code> generates a list of precision matrices <code>out.tlasso</code>. Default is maximal iteration <code>T=1</code> and termination thresholding level <code>thres=1e-05</code>. If estimation output changes less than <code>thres</code>, in terms of Frobenius norm, after certain iteration, <code>Tlasso.fit</code> will be terminated immediately (before Tth iteration). The performance of <code>Tlasso.fit</code> can be evaluated by <code>est.analysis</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compare out.tlasso and Omega.true.list</span>
+<span class="co"># main diagnoal is taken into consideration</span>
+<span class="kw">est.analysis</span>(out.tlasso,Omega.true.list,<span class="dt">offdiag=</span><span class="ot">FALSE</span>)</code></pre>
+<pre><code>## $error.kro
+## [1] 0.3656762
+## 
+## $tpr.kro
+## [1] 1
+## 
+## $tnr.kro
+## [1] 0.4989574
+## 
+## $av.error.f
+## [1] 0.1986636
+## 
+## $av.error.max
+## [1] 0.08618703
+## 
+## $av.tpr
+## [1] 1
+## 
+## $av.tnr
+## [1] 0.3333333
+## 
+## $error.f
+## [1] 0.2130124 0.0980819 0.2848964
+## 
+## $error.max
+## [1] 0.07814616 0.05873962 0.12167531
+## 
+## $tpr
+## [1] 1 1 1
+## 
+## $tnr
+## [1] 0.0000000 0.3333333 0.6666667</code></pre>
+<p><code>est.analysis</code> returns a list of estimation performance measures:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Argument</th>
+<th align="left">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Out$error.kro</code></td>
+<td align="left">error in Frobenius norm of kronecker product</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$tpr.kro</code></td>
+<td align="left">TPR of kronecker product</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$tnr.kro</code></td>
+<td align="left">TNR of kronecker product</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$av.error.f</code></td>
+<td align="left">averaged Frobenius norm error across all modes</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$av.error.max</code></td>
+<td align="left">averaged Max norm error across all modes</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$av.tpr</code></td>
+<td align="left">averaged TPR across all modes</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$av.tnr</code></td>
+<td align="left">averaged TNR across all modes</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$error.f</code></td>
+<td align="left">vector; error in Frobenius norm of each mode</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$error.max</code></td>
+<td align="left">vector; error in Max norm of each mode</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$tpr</code></td>
+<td align="left">vector; TPR of each mode</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$tnr</code></td>
+<td align="left">vector; TNR of each mode</td>
+</tr>
+</tbody>
+</table>
+<p>Given <code>DATA</code> and <code>out.tlasso</code>, we next show how to compute test statistic.</p>
+<pre class="sourceCode r"><code class="sourceCode r">mat.list=<span class="kw">list</span>() <span class="co"># list of matrices of test statistic value  </span>
+for ( k in <span class="dv">1</span>:<span class="kw">length</span>(m.vec)) {
+  rho=<span class="kw">covres</span>(DATA, out.tlasso, <span class="dt">k =</span> k) 
+  <span class="co"># sample covariance matrix of residuals, including diagnoal </span>
+  bias_rho=<span class="kw">biascor</span>(rho,out.tlasso,<span class="dt">k=</span>k)
+  <span class="co"># bias corrected sample covariance of residuals, excluding diagnoal</span>
+  
+  varpi2=<span class="kw">varcor</span>(DATA, out.tlasso, <span class="dt">k =</span> k)
+  <span class="co"># variance correction term for kth mode's sample covariance of residuals</span>
+
+  tautest=<span class="kw">matrix</span>(<span class="dv">0</span>,m.vec[k],m.vec[k])
+  for( i in <span class="dv">1</span>:(m.vec[k]-<span class="dv">1</span>)) {
+    for ( j in (i<span class="dv">+1</span>):m.vec[k]){
+      tautest[j,i]=tautest[i,j]=<span class="kw">sqrt</span>((n<span class="dv">-1</span>)*<span class="kw">prod</span>(m.vec[-k]))*
+<span class="st">                      </span>bias_rho[i,j]/<span class="kw">sqrt</span>(varpi2*rho[i,i]*rho[j,j])
+      <span class="co"># compute final test statistic </span>
+    }
+  }
+  
+  mat.list[[k]]=tautest
+}
+mat.list[[<span class="dv">1</span>]]</code></pre>
+<pre><code>##            [,1]      [,2]      [,3]     [,4]       [,5]
+## [1,]  0.0000000  2.761395 -0.231802 1.509672 -0.4881653
+## [2,]  2.7613945  0.000000  2.411092 0.797850 -1.2962198
+## [3,] -0.2318020  2.411092  0.000000 2.153166  1.2980072
+## [4,]  1.5096719  0.797850  2.153166 0.000000  2.3900777
+## [5,] -0.4881653 -1.296220  1.298007 2.390078  0.0000000</code></pre>
+<p>To compute test statistic, we first need to compute sample covariance of residuals via <code>rho</code>. <code>rho</code> returns a sample covariance matrix, including diagnoal. Then we conduct bias correction <code>biascor</code> and variance correction <code>varcor</code>. <code>biascor</code> returns a bias corrected sample covariance matrix. <code>varcor</code> returns a scalar to scale test statistic into standard normal. Given test statistic value <code>mat.list</code>, we turn to test hypothesis. The significant level we choose is <span class="math">\(0.95\)</span>.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># inference measures (off-diagnoal), critical value is 0.975 quantile of standard normal</span>
+<span class="kw">infer.analysis</span>(mat.list, <span class="kw">qnorm</span>(<span class="fl">0.975</span>), Omega.true.list, <span class="dt">offdiag=</span><span class="ot">TRUE</span>)</code></pre>
+<pre><code>## $fp
+## [1] 0 0 2
+## 
+## $fn
+## [1] 0 0 4
+## 
+## $d
+## [1] 8 8 6
+## 
+## $nd
+## [1] 12 12 14
+## 
+## $t
+## [1] 8 8 8</code></pre>
+<p><code>infer.analysis</code> returns a list of inference performance measures:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Argument</th>
+<th align="left">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><code>Out$fp</code></td>
+<td align="left">vector; number of false positive of each mode</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$fn</code></td>
+<td align="left">vector; number of false negative of each mode</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$d</code></td>
+<td align="left">vector; number of all discovery of each mode</td>
+</tr>
+<tr class="even">
+<td align="left"><code>Out$nd</code></td>
+<td align="left">vector; number of all non-discovery of each mode</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>Out$t</code></td>
+<td align="left">vector; number of all true non-zero entries of each mode</td>
+</tr>
+</tbody>
+</table>
+<p>Due to the fact that this inference procedure relies on multiple testing, FDR control is indispensible. <a href="http://arxiv.org/abs/1609.04522">Sun et al. (2016)</a> provides an easy-implemented and efficient FDR control procedure. This procedure asymptotically controls FDR via selecting the smallest critical value that contrains FDP under certain level.</p>
+<pre class="sourceCode r"><code class="sourceCode r">k=<span class="dv">1</span> <span class="co"># interested mode </span>
+upsilon=<span class="fl">0.1</span>  <span class="co"># control level</span>
+
+<span class="co"># compute the difference between FDP and upsilon</span>
+fun=function(varsigma,mk,upsilon,tautest) {
+  <span class="kw">return</span>((<span class="dv">2</span>*(<span class="dv">1</span>-<span class="kw">pnorm</span>(varsigma))*mk*(mk<span class="dv">-1</span>))/<span class="kw">max</span>(<span class="dv">1</span>,<span class="kw">sum</span>(<span class="kw">sign</span>(<span class="kw">abs</span>(tautest) &gt;<span class="st"> </span>varsigma))) -<span class="st"> </span>upsilon)
+}
+
+<span class="co"># select a critical value in (0,6) that has the samllest difference </span>
+diff=<span class="kw">c</span>();ind=<span class="dv">1</span>;inter=<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">6</span>,<span class="fl">0.0001</span>)
+for (varsigma in inter) {
+    diff[ind]=<span class="kw">fun</span>(varsigma,<span class="dt">mk=</span>m.vec[k],<span class="dt">upsilon=</span>upsilon,<span class="dt">tautest=</span>mat.list[[k]])
+    ind=ind<span class="dv">+1</span>
+}
+<span class="co"># the smallest critical value that constrains FDP under upsilon</span>
+critical=inter[<span class="kw">min</span>(<span class="kw">which</span>(diff &lt;<span class="st"> </span><span class="dv">0</span>))]
+
+<span class="co"># testing hypothesis with the critcal value </span>
+<span class="co"># FDR will converge to the limit proved in Sun et al. 2016</span>
+inference.FDR=<span class="kw">infer.analysis</span>(mat.list, critical, Omega.true.list, <span class="dt">offdiag=</span><span class="ot">TRUE</span>)</code></pre>
+<p>Finally, we would like to visualize graph structure of inference via <code>graph.pattern</code>.</p>
+<pre class="sourceCode r"><code class="sourceCode r">k=<span class="dv">1</span> <span class="co"># interested mode</span>
+<span class="co"># true graph structure. </span>
+<span class="co"># set thres=0 in case true edge is eliminated</span>
+<span class="kw">graph.pattern</span>(Omega.true.list[[<span class="dv">1</span>]],<span class="dt">main=</span><span class="st">'True graph of mode 1'</span>,<span class="dt">thres=</span><span class="dv">0</span>)</code></pre>
+<p><img src="data:image/png;base64,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" title alt style="display: block; margin: auto;" /></p>
+<pre class="sourceCode r"><code class="sourceCode r">inf.mat=mat.list[[k]] &gt;<span class="st"> </span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)
+<span class="co"># set thres=0 (&lt;1) since inf.mat is logical</span>
+<span class="kw">graph.pattern</span>(inf.mat,<span class="dt">main=</span><span class="st">'Inference of mode 1'</span>,<span class="dt">thres=</span><span class="dv">0</span>)</code></pre>
+<p><img src="data:image/png;base64,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2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgAAJ2AA6VSKAAAIIIEACZh9AAAEEEEDAgMD/B1JzfEhJey7YAAAAAElFTkSuQmCC" title alt style="display: block; margin: auto;" /></p>
+<p>From graphs we can see that inference result quite matches true graph.</p>
+<p><a href="#top">Back to Top</a></p>
+<p><a id="ref"></a></p>
+</div>
+<div id="reference" class="section level2">
+<h2>Reference</h2>
+<ol style="list-style-type: decimal">
+<li>Fan J, Feng Y, Wu Y. <em>Network exploration via the adaptive LASSO and SCAD penalties.</em> <strong><em>The annals of applied statistics</em></strong>, 2009, <strong>3(2): 521</strong>.</li>
+<li>Friedman J, Hastie T, Tibshirani R. <em>Sparse inverse covariance estimation with the graphical lasso.</em> <strong><em>Biostatistics</em></strong>, 2008: <strong>9.3: 432-441</strong>.</li>
+<li>Lee W, Liu Y. <em>Joint estimation of multiple precision matrices with common structures.</em> <strong><em>Journal of Machine Learning Research</em></strong>, 2015, <strong>16: 1035-1062</strong>.</li>
+<li>Li H, Gui J. <em>Gradient directed regularization for sparse Gaussian concentration graphs, with applications to inference of genetic networks.</em> <strong><em>Biostatistics</em></strong>, 2006, <strong>7(2): 302-317</strong>.</li>
+<li>Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. <em>Sparse Tensor Graphical Model: Non-convex Optimization and Statistical Inference.</em> 2016. <strong>arXiv:1609.04522</strong>.</li>
+</ol>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
