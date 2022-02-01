@@ -1,7 +1,7 @@
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 library(Tlasso)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 m.vec = c(5,5,5)  # dimensionality of a tensor 
 # m1, m2, m3
 n = 5   # sample size 
@@ -13,7 +13,7 @@ for (k in 1:length(m.vec)) {
 
 Omega.true.list[[1]]
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 Sigma.true.list = list()
 for (k in 1:length(m.vec)) {
   Sigma.true.list[[k]] = solve(Omega.true.list[[k]])
@@ -22,7 +22,7 @@ for (k in 1:length(m.vec)) {
 DATA=Trnorm(n,m.vec,Sigma.list=Sigma.true.list) 
 # obersavations from tensor normal distribution
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  DATA2=Trnorm(n,m.vec)
 #  # default is triangle graph
 #  # equivalent to DATA2 = Trnorm(n,m.vec, type='Chain', sd=1)
@@ -30,7 +30,7 @@ DATA=Trnorm(n,m.vec,Sigma.list=Sigma.true.list)
 #  # 4 nearest-neighbor graph
 #  # equivalent to DATA3 = Trnorm(n,m.vec, type='Neighbor', sd=1, knn=4)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 lambda.thm = 20*c( sqrt(log(m.vec[1])/(n*prod(m.vec))), 
                    sqrt(log(m.vec[2])/(n*prod(m.vec))), 
                    sqrt(log(m.vec[3])/(n*prod(m.vec))))
@@ -39,12 +39,12 @@ out.tlasso = Tlasso.fit(DATA,T=1,lambda.vec = lambda.thm)
 # output is a list of estimation of precision matrices
 out.tlasso[[1]]
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # compare out.tlasso and Omega.true.list
 # main diagnoal is taken into consideration
 est.analysis(out.tlasso,Omega.true.list,offdiag=FALSE)
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 mat.list=list() # list of matrices of test statistic value  
 for ( k in 1:length(m.vec)) {
   rho=covres(DATA, out.tlasso, k = k) 
@@ -68,11 +68,11 @@ for ( k in 1:length(m.vec)) {
 }
 mat.list[[1]]
 
-## ------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # inference measures (off-diagnoal), critical value is 0.975 quantile of standard normal
 infer.analysis(mat.list, qnorm(0.975), Omega.true.list, offdiag=TRUE)
 
-## ---- eval=FALSE---------------------------------------------------------
+## ---- eval=FALSE--------------------------------------------------------------
 #  k=1 # interested mode
 #  upsilon=0.1  # control level
 #  
@@ -91,10 +91,10 @@ infer.analysis(mat.list, qnorm(0.975), Omega.true.list, offdiag=TRUE)
 #  critical=inter[min(which(diff < 0))]
 #  
 #  # testing hypothesis with the critcal value
-#  # FDR will converge to the limit proved in Sun et al. 2016
+#  # FDR will converge to the limit proved in Lyu et al. 2019.
 #  inference.FDR=infer.analysis(mat.list, critical, Omega.true.list, offdiag=TRUE)
 
-## ---- fig.height=5 , fig.width=5, fig.align='center'---------------------
+## ---- fig.height=5 , fig.width=5, fig.align='center'--------------------------
 k=1 # interested mode
 # true graph structure. 
 # set thres=0 in case true edge is eliminated

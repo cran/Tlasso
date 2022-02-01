@@ -11,7 +11,7 @@ signal(Omega.list, i = 1, k = 1)
 Omega.list can be either true precision matrices or output of \code{Tlasso.fit}.   
 for the kth tensor mode, \eqn{k \in \{1 , \ldots, K\}}{ 1 <= k <= K }.}
 
-\item{i}{index of interested regression parameter, default is 1. See details in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.}
+\item{i}{index of interested regression parameter, default is 1. See details in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.}
 
 \item{k}{index of interested mode, default is 1.}
 }
@@ -19,11 +19,11 @@ for the kth tensor mode, \eqn{k \in \{1 , \ldots, K\}}{ 1 <= k <= K }.}
 A vector of regression paramter.
 }
 \description{
-Compute regression parameter of conditional linear model of separable tensor normal distribution described in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+Compute regression parameter of conditional linear model of separable tensor normal distribution described in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 }
 \details{
 This function computes regression parameter and is fundamental for sample covariance of residuals and 
-bias correction. See details in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+bias correction. See details in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 }
 \examples{
 
@@ -41,10 +41,9 @@ signal(out.tlasso, i=2 , k=k )
 # the regression parameter for conditional linear model of 2rd row in 1st mode
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{covres}}, \code{\link{biascor}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

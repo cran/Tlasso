@@ -1,6 +1,6 @@
 #' Sample Covariance Matrix of Residuals
 #'
-#' Generate sample covariance matrix of residuals (includes diagnoal) described in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+#' Generate sample covariance matrix of residuals (includes diagnoal) described in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 #'
 #' @param data tensor object stored in a m1 * m2 * ... * mK * n array, where n is sample size
 #' and mk is dimension of the kth tensor mode.
@@ -9,13 +9,13 @@
 #' @param k index of interested mode, default is 1.
 #' 
 #'
-#' @details This function computes sample covariance of residuals and is the basis for support recovery procedure in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}. Note that output matrix includes 
-#' diagnoal while bias corrected matrix (output of \code{\link{biascor}}) for inference is off-diagnoal, see \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.
+#' @details This function computes sample covariance of residuals and is the basis for support recovery procedure in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}. Note that output matrix includes 
+#' diagnoal while bias corrected matrix (output of \code{\link{biascor}}) for inference is off-diagnoal, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 #'  Elements in Omega.list are true precision matrices or estimation of the true ones, the latter can be output of \code{\link{Tlasso.fit}}.
 #' 
-#' @return A matrix whose (i,j) entry (includes diagnoal) is sample covariance of the ith and jth residuals in the kth mode. See \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.  
+#' @return A matrix whose (i,j) entry (includes diagnoal) is sample covariance of the ith and jth residuals in the kth mode. See \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.  
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{varcor}}, \code{\link{biascor}}
 #'
 #' @examples

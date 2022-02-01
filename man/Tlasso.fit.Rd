@@ -25,10 +25,10 @@ If \code{thres} is negative or zero, this algorithm will iterate T times.}
 A length-K list of estimation of precision matrices.
 }
 \description{
-An alternating optimization algorithm for estimation of precision matrices of sparse tensor graphical models. See \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.
+An alternating optimization algorithm for estimation of precision matrices of sparse tensor graphical models. See \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 }
 \details{
-This function conducts an alternating optimization algorithm to sparse tensor graphical model. The output is optimal consistent even when \code{T=1}, see \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.
+This function conducts an alternating optimization algorithm to sparse tensor graphical model. The output is optimal consistent even when \code{T=1}, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 There are two ternimation criteria, \code{T} and \code{thres}. Algorithm will be terminated if output in certain iteration change less than \code{thres}. Otherwise, T iterations will be fully operated.
 }
 \examples{
@@ -47,10 +47,9 @@ out.tlasso = Tlasso.fit(DATA,T=3,lambda.vec = lambda.thm,thres=0)
 
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{varcor}}, \code{\link{biascor}}, \code{\link{huge}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

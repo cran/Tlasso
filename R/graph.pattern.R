@@ -17,7 +17,7 @@
 #' 
 #' @return A plot of undirected graph.
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{infer.analysis}}, \code{\link{est.analysis}}
 #'
 #' @examples

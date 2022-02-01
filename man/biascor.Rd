@@ -15,14 +15,14 @@ for the kth tensor mode, \eqn{k \in \{1 , \ldots, K\}}{ 1 <= k <= K }. For examp
 \item{k}{index of interested mode, default is 1.}
 }
 \value{
-A matrix whose (i,j) entry (excludes diagnoal; diagnoal is zero vector) is bias-corrected sample covariance of the ith and jth residuals in the kth mode. See \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.
+A matrix whose (i,j) entry (excludes diagnoal; diagnoal is zero vector) is bias-corrected sample covariance of the ith and jth residuals in the kth mode. See \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 }
 \description{
-Generate a matrix of bias-corrected sample covariance of residuals (excludes diagnoal) described in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+Generate a matrix of bias-corrected sample covariance of residuals (excludes diagnoal) described in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 }
 \details{
 This function computes bias-corrected sample covariance of residuals (excludes diagnoal, diagnoal is zero vector). 
-Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details. 
+Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details. 
 Elements in \code{Omega.list} are true precision matrices or estimation of the true ones, the latter can be output of \code{\link{Tlasso.fit}}.
 }
 \examples{
@@ -45,10 +45,9 @@ bias_rho # bias-corrected sample covariance of residuals
 # diagnoal is zero vector
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{varcor}}, \code{\link{covres}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

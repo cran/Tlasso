@@ -1,6 +1,6 @@
 ---
 title: "Package \"Tlasso\""
-author: "Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. "
+author: "Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. "
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -31,7 +31,7 @@ This package considers the estimation and inference of sparse graphical models t
 
 ## Methodology
 
-### Estimation: Tlasso Algorithm. [Sun et al. (2016)][3]
+### Estimation: Tlasso Algorithm. [Lyu et al. (2019)][3]
 
 A tensor ${\cal T} \in \mathbb R^{m_1 \times m_2 \times \cdots \times m_K}$ follows the tensor normal distribution with zero mean and covariance matrices $\bf{\Sigma}_1, \ldots, \bf{\Sigma}_K$, denoted as ${\cal T} \sim \textrm{TN}({\bf0}; \bf{\Sigma}_1, \ldots, \bf{\Sigma}_K)$, if its probability density function is
 $$
@@ -53,11 +53,11 @@ $q_n(\bf{\Omega}_1, \ldots, \bf{\Omega}_K)$ is jointly non-convex with respect t
 $$
 L(\bf{\Omega}_k) :=  \frac{1}{m_k}\textrm{tr}(\bf{S}_k \bf{\Omega}_k) - \frac{1}{m_k} \log |\bf{\Omega}_k| + \lambda_k \|\bf{\Omega}_k\|_{1,\textrm{off}}. 
 $$
-Here $\bf{S}_k := \frac{m_k}{n m}\sum_{i=1}^n \bf{V}_i^k \bf{V}_i^{k\top}$, where $\bf{V}_i^k := \big[ {\cal T}_i \times \big\{\bf{\Omega}_1^{1/2},\ldots,\bf{\Omega}_{k-1}^{1/2}, 1_{m_k}, \bf{\Omega}_{k+1}^{1/2},\ldots,\bf{\Omega}_{K}^{1/2}    \big\} \big]_{(k)}$ with $\times$ the tensor product operation and $[\cdot]_{(k)}$ the mode-$k$ matricization operation defined in \S\ref{sec:prelim}. Note that minimizing $L(\bf{\Omega}_k)$ corresponds to estimating vector-valued Gaussian graphical model and can be solved efficiently via the glasso algorithm [Friedman et al. (2008)][2]. See [Sun et al. (2016)][3] for detailed algorithm, named **Tlasso**. 
+Here $\bf{S}_k := \frac{m_k}{n m}\sum_{i=1}^n \bf{V}_i^k \bf{V}_i^{k\top}$, where $\bf{V}_i^k := \big[ {\cal T}_i \times \big\{\bf{\Omega}_1^{1/2},\ldots,\bf{\Omega}_{k-1}^{1/2}, 1_{m_k}, \bf{\Omega}_{k+1}^{1/2},\ldots,\bf{\Omega}_{K}^{1/2}    \big\} \big]_{(k)}$ with $\times$ the tensor product operation and $[\cdot]_{(k)}$ the mode-$k$ matricization operation defined in \S\ref{sec:prelim}. Note that minimizing $L(\bf{\Omega}_k)$ corresponds to estimating vector-valued Gaussian graphical model and can be solved efficiently via the glasso algorithm [Friedman et al. (2008)][2]. See [Lyu et al. (2019)][3] for detailed algorithm, named **Tlasso**. 
 
 ### Inference:
  
-Multiple testing method is established to testing the entries of precision matrix for each way of the tensor, [Sun et al. (2016)][3]. We focus on $\bf{\Omega}_1^*$, and procedures on the rest $K-1$ precision matrices are symmetric.  Hypothesis for $\bf{\Omega}_1^*$ is, $\forall \,1 \le i < j \le m_1$, 
+Multiple testing method is established to testing the entries of precision matrix for each way of the tensor, [Lyu et al. (2019)][3]. We focus on $\bf{\Omega}_1^*$, and procedures on the rest $K-1$ precision matrices are symmetric.  Hypothesis for $\bf{\Omega}_1^*$ is, $\forall \,1 \le i < j \le m_1$, 
 $$
 H_{0 1 , i j } : \;  [{\bf{\Omega}}_1^*]_{i,j} =0  \quad\quad \textrm{vs} \quad\quad H_{11 , ij} : \;  [\bf{\Omega}_1^*]_{i,j} \ne  0 
 $$
@@ -89,7 +89,7 @@ plays a significant role in rescaling $\tau_{i,j}$ into an asymptotic standard n
 $
 \widehat{\bf{S}}_k := \frac{m_k}{nm} \sum_{i=1}^n \widehat{\bf{V}}_i \widehat{\bf{V}}_i^{\top}
 $
-is the estimate of $\bf{\Sigma}_k$ with $\widehat{\bf{V}}_i := \big[ {\cal T}_i \times \bigl\{\widehat{\bf{\Omega}}_1^{1/2},\ldots,\widehat{\bf{\Omega}}_{k-1}^{1/2}, 1_{m_k}, \widehat{\bf{\Omega}}_{k+1}^{1/2},\ldots,\widehat{\bf{\Omega}}_{K}^{1/2} \bigr\} \big]_{(k)}$ and $\widehat{\bf{\Omega}}_{k}$ from **Tlasso** Algorithm, $k \in \{2 , \ldots , K \}$. [Sun et al. (2016()][3] proves that, under certain conditions, 
+is the estimate of $\bf{\Sigma}_k$ with $\widehat{\bf{V}}_i := \big[ {\cal T}_i \times \bigl\{\widehat{\bf{\Omega}}_1^{1/2},\ldots,\widehat{\bf{\Omega}}_{k-1}^{1/2}, 1_{m_k}, \widehat{\bf{\Omega}}_{k+1}^{1/2},\ldots,\widehat{\bf{\Omega}}_{K}^{1/2} \bigr\} \big]_{(k)}$ and $\widehat{\bf{\Omega}}_{k}$ from **Tlasso** Algorithm, $k \in \{2 , \ldots , K \}$. [Lyu et al. (2019)][3] proves that, under certain conditions, 
 $$ \sqrt{\frac{(n-1) m  }{ m_1 \hat{\varrho}_{i,i} \hat{\varrho}_{j,j} }} \tau_{i,j}  \rightarrow \textrm{N} ( 0 ;1 ) $$
 in distribution, as $nm/m_1 \rightarrow \infty$.
 
@@ -109,7 +109,7 @@ $$
 $$
 Note that we set $\tilde{\tau}_{i,j} = \tilde{\tau}_{j,i}$ for $1 \le i < j \le m_1$. The inference of $\textrm{supp}(\bf{\Omega}_k^*) , \, k \in \{2 , \ldots , K \}$, is a symmetric procedure.
 
-[Sun et al. (2016)][3] gives the asymptotic control of $\text{FDP}_1$ and $\text{FDR}_1$ for the support of $\bf{\Omega}_{1}^*$: under certain conditions,
+[Lyu et al. (2019)][3] gives the asymptotic control of $\text{FDP}_1$ and $\text{FDR}_1$ for the support of $\bf{\Omega}_{1}^*$: under certain conditions,
 $$\textrm{FDP}_1 w / \upsilon w_0 \rightarrow 1 , \; \textrm{FDR}_1  w / \upsilon w_0 \rightarrow 1 $$
 in probability as $nm/m_1 \rightarrow \infty$.
 
@@ -131,18 +131,18 @@ This packages contains following functions:
   : This function generates obeservations from separable tensor normal distribution and returns a $m_1 * \ldots * m_K * n$ array. If `Sigma.list` is not given, default distribution is from either triangle graph or nearest-neighbor graph (depends on `type`).
 
 1. `Tlasso.fit`
-  : This function conducts an alternating optimization algorithm to precision matrices of sparse tensor graphical models. The output is optimal consistent even when $T=1$, see [Sun et al. (2016)][3] for details. There are two ternimation criteria, `T` and `thres`. Algorithm will be terminated if output in certain iteration change less than `thres`. Otherwise, T iterations will be fully operated.
+  : This function conducts an alternating optimization algorithm to precision matrices of sparse tensor graphical models. The output is optimal consistent even when $T=1$, see [Lyu et al. (2019)][3] for details. There are two ternimation criteria, `T` and `thres`. Algorithm will be terminated if output in certain iteration change less than `thres`. Otherwise, T iterations will be fully operated.
 
 
 1. `covres`
-  : This function generates sample covariance matrix of residuals (includes diagnoal) and is the basis for support recovery procedure, see [Sun et al. (2016)][3]. Note that output matrix includes diagnoal while bias corrected matrix (output of `biascor`) for inference is off-diagnoal. Elements in Omega.list are true precision matrices or estimation of the true ones, the latter can be output of `Tlasso.fit`.
+  : This function generates sample covariance matrix of residuals (includes diagnoal) and is the basis for support recovery procedure, see [Lyu et al. (2019)][3]. Note that output matrix includes diagnoal while bias corrected matrix (output of `biascor`) for inference is off-diagnoal. Elements in Omega.list are true precision matrices or estimation of the true ones, the latter can be output of `Tlasso.fit`.
 
 1. `biascor`
-  : This function computes bias corrected sample covariance matrix of residuals (excludes diagnoal, diagnoal is zero vector). Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see [Sun et al. (2016)][3] for details. Elements in `Omega.list` are true precision matrices or estimation of the true ones, the latter can be output of `Tlasso.fit`.
+  : This function computes bias corrected sample covariance matrix of residuals (excludes diagnoal, diagnoal is zero vector). Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see [Lyu et al. (2019)][3] for details. Elements in `Omega.list` are true precision matrices or estimation of the true ones, the latter can be output of `Tlasso.fit`.
 
 
 1. `varcor`
-  : This function computes variance correction term of sample covariance of residuals and is utilized to normalize test statistic into standord normal, see [Sun et al. (2016)][3] for details.  
+  : This function computes variance correction term of sample covariance of residuals and is utilized to normalize test statistic into standord normal, see [Lyu et al. (2019)][3] for details.  
 
 1. `est.analysis`
   : This function generates a list of performance measures of optimazation for sparse tensor graphical models, i.e., estimation errors and model selection consistency. Errors are measured in Frobenius norm and Max norm. Model selection measures are TPR and TNR. All these measures are computed in each mode, average across all modes, and kronecker production of precision matrices.
@@ -289,7 +289,7 @@ infer.analysis(mat.list, qnorm(0.975), Omega.true.list, offdiag=TRUE)
 |  `Out$t`           |  vector; number of all true non-zero entries of each mode |
 
 
-Due to the fact that this inference procedure relies on multiple testing, FDR control is indispensible. [Sun et al. (2016)][3] provides an easy-implemented and efficient FDR control procedure. This procedure asymptotically controls FDR via selecting the smallest critical value that contrains FDP under certain level. 
+Due to the fact that this inference procedure relies on multiple testing, FDR control is indispensible. [Lyu et al. (2019)][3] provides an easy-implemented and efficient FDR control procedure. This procedure asymptotically controls FDR via selecting the smallest critical value that contrains FDP under certain level. 
 
 ```{r, eval=FALSE}
 k=1 # interested mode 
@@ -310,7 +310,7 @@ for (varsigma in inter) {
 critical=inter[min(which(diff < 0))]
 
 # testing hypothesis with the critcal value 
-# FDR will converge to the limit proved in Sun et al. 2016
+# FDR will converge to the limit proved in Lyu et al. 2019.
 inference.FDR=infer.analysis(mat.list, critical, Omega.true.list, offdiag=TRUE)
 ```
 
@@ -328,6 +328,16 @@ graph.pattern(inf.mat,main='Inference of mode 1',thres=0)
 
 From graphs we can see that inference result quite matches true graph.   
 
+
+
+ 
+
+
+
+
+
+
+
 [Back to Top](#top)
 
 
@@ -339,12 +349,11 @@ From graphs we can see that inference result quite matches true graph.
 1. Friedman J, Hastie T, Tibshirani R. *Sparse inverse covariance estimation with the graphical lasso.* ***Biostatistics***, 2008: **9.3: 432-441**.
 1. Lee W, Liu Y. *Joint estimation of multiple precision matrices with common structures.* ***Journal of Machine Learning Research***, 2015, **16: 1035-1062**.
 1. Li H, Gui J. *Gradient directed regularization for sparse Gaussian concentration graphs, with applications to inference of genetic networks.* ***Biostatistics***, 2006, **7(2): 302-317**.
-1. Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. *Sparse Tensor Graphical Model: Non-convex Optimization and Statistical Inference.* 2016. **arXiv:1609.04522**.
+1. Lyu, X., Sun, W. W., Wang, Z., Liu, H., Yang, J., Cheng, G. *Tensor graphical model: Non-convex optimization and statistical inference.* ***IEEE transactions on pattern analysis and machine intelligence***, 2019: **42(8): 2024-2037**.
 
 
-
-[2]: http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3019769/
-[3]: http://arxiv.org/abs/1609.04522
-[4]: http://arxiv.org/abs/0908.2053
-[5]: http://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with
-[6]: http://jmlr.org/papers/v16/lee15a.html
+[2]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3019769/
+[3]: https://arxiv.org/abs/1609.04522
+[4]: https://arxiv.org/abs/0908.2053
+[5]: https://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with
+[6]: https://jmlr.org/papers/v16/lee15a.html

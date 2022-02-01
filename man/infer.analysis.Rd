@@ -76,10 +76,9 @@ infer.analysis(mat.list, qnorm(0.975), Omega.true.list, offdiag=TRUE)
 # inference measures (off-diagnoal) 
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{Tlasso.fit}}, \code{\link{est.analysis}}, \code{\link{ChainOmega}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

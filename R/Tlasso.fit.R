@@ -1,6 +1,6 @@
 #' Non-Convex Optimization for Sparse Tensor Graphical Models
 #'
-#' An alternating optimization algorithm for estimation of precision matrices of sparse tensor graphical models. See \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.
+#' An alternating optimization algorithm for estimation of precision matrices of sparse tensor graphical models. See \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 #' 
 #' @param data tensor object stored in a m1 * m2 * ... * mK * n array, where n is sample size
 #' and mk is dimension of the kth tensor mode.
@@ -12,12 +12,12 @@
 #' @param thres thresholding value that terminates algorithm before Tth iteration if output change less than \code{thres} after certain iteration, in terms of summation over Frobenius norm. 
 #' If \code{thres} is negative or zero, this algorithm will iterate T times.
 #' 
-#' @details This function conducts an alternating optimization algorithm to sparse tensor graphical model. The output is optimal consistent even when \code{T=1}, see \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.
+#' @details This function conducts an alternating optimization algorithm to sparse tensor graphical model. The output is optimal consistent even when \code{T=1}, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.
 #' There are two ternimation criteria, \code{T} and \code{thres}. Algorithm will be terminated if output in certain iteration change less than \code{thres}. Otherwise, T iterations will be fully operated.
 #' 
 #' @return A length-K list of estimation of precision matrices.  
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{varcor}}, \code{\link{biascor}}, \code{\link{huge}}
 #'
 #' @examples

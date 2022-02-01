@@ -4,9 +4,15 @@
 \alias{graph.pattern}
 \title{Graph Pattern Visualization}
 \usage{
-graph.pattern(mat, main = NULL, edge.color = "gray50",
-  vertex.color = "red", vertex.size = 3, vertex.label = NA,
-  thres = 1e-05)
+graph.pattern(
+  mat,
+  main = NULL,
+  edge.color = "gray50",
+  vertex.color = "red",
+  vertex.size = 3,
+  vertex.label = NA,
+  thres = 1e-05
+)
 }
 \arguments{
 \item{mat}{precision matrix that encodes information of graph struture.}
@@ -41,10 +47,9 @@ graph.pattern(ChainOmega(5, sd = 13))
 # a triangle graph
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{infer.analysis}}, \code{\link{est.analysis}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

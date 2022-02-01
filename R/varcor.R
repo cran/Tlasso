@@ -1,6 +1,6 @@
 #' Variance Correction of Sample Covariance of Residuals
 #'
-#' Generate variance correction term of sample covariance of residuals described in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+#' Generate variance correction term of sample covariance of residuals described in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 #'
 #' @param data tensor object stored in a m1 * m2 * ... * mK * n array, where n is sample size
 #' and mk is dimension of the kth tensor mode.
@@ -11,11 +11,11 @@
 #' @param k index of interested mode, default is 1.
 #' 
 #' @details This function computes variance correction term of sample covariance of residuals and
-#'  is utilized to normalize test statistic into standord normal, see \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.  
+#'  is utilized to normalize test statistic into standord normal, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.  
 #' 
 #' @return A scalar of variance correction for the kth mode.  
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{varcor}}, \code{\link{biascor}}, \code{\link{covres}}
 #'
 #' @examples

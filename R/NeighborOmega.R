@@ -1,7 +1,7 @@
 #' Precision Matrix of Nearest-Neighbor Graph
 #'
-#' Generate precision matrix of nearest-neighbor network following the set-up in \href{http://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with}{Li and Gui (2006)}
-#' and \href{http://www.jmlr.org/papers/volume16/lee15a/lee15a.pdf}{Lee and Liu (2006)}.
+#' Generate precision matrix of nearest-neighbor network following the set-up in \href{https://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with}{Li and Gui (2006)}
+#' and \href{https://www.jmlr.org/papers/volume16/lee15a/lee15a.pdf}{Lee and Liu (2006)}.
 #'
 #' @param p dimension of generated precision matrix.
 #' @param sd seed for random number generation. Default is 1.
@@ -18,7 +18,7 @@
 #' 
 #' @return A precision matrix generated from the \code{knn} nearest-neighor graph.
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{ChainOmega}}
 #'
 #' @examples

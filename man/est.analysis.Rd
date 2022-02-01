@@ -61,10 +61,9 @@ est.analysis(out.tlasso, Omega.true.list, offdiag=TRUE)
 # generate a list of performance measures
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{Tlasso.fit}}, \code{\link{NeighborOmega}}, \code{\link{ChainOmega}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

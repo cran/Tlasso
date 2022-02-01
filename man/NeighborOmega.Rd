@@ -20,8 +20,8 @@ if norm.type = 1 and \eqn{\|\Omega\|_{F}=1}{||\Omega||_F =1 } if norm.type = 2. 
 A precision matrix generated from the \code{knn} nearest-neighor graph.
 }
 \description{
-Generate precision matrix of nearest-neighbor network following the set-up in \href{http://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with}{Li and Gui (2006)}
-and \href{http://www.jmlr.org/papers/volume16/lee15a/lee15a.pdf}{Lee and Liu (2006)}.
+Generate precision matrix of nearest-neighbor network following the set-up in \href{https://paperity.org/p/38773767/gradient-directed-regularization-for-sparse-gaussian-concentration-graphs-with}{Li and Gui (2006)}
+and \href{https://www.jmlr.org/papers/volume16/lee15a/lee15a.pdf}{Lee and Liu (2006)}.
 }
 \details{
 For a \code{knn} nearest-neighbor graph, this function first randomly picks p points from a 
@@ -44,10 +44,9 @@ for ( k in 1:length(m.vec)){
 Omega.true.list  # a list of length 3 contains precision matrices from 4-nearnest neighbor graph
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{ChainOmega}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

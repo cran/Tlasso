@@ -18,12 +18,12 @@ if norm.type = 1 and \eqn{\|\Omega\|_{F}=1}{||\Omega||_F =1 } if norm.type = 2. 
 A precision matrix generated from triangle graph.
 }
 \description{
-Generate precision matrix of triangle graph (chain like network) following the set-up in \href{http://arxiv.org/abs/0908.2053}{Fan et al. (2009)}.
+Generate precision matrix of triangle graph (chain like network) following the set-up in \href{https://arxiv.org/abs/0908.2053}{Fan et al. (2009)}.
 }
 \details{
 This function first construct a covariance matrix \eqn{\Sigma}{\Sigma} that its (i,j) entry is 
 \eqn{\exp (- | h_i - h_j |/2)}{exp (- | h_i - h_j | / 2)} with \eqn{h_1 < h_2 < \ldots < h_p}{h_1 < h_2 < \ldots < h_p}.
-The difference \eqn{h_i - h_{i+1}}{h_i - h_{i+1}} is generated i.i.d. from Unif(0.5,1). See \href{http://arxiv.org/abs/0908.2053}{Fan et al. (2009)} 
+The difference \eqn{h_i - h_{i+1}}{h_i - h_{i+1}} is generated i.i.d. from Unif(0.5,1). See \href{https://arxiv.org/abs/0908.2053}{Fan et al. (2009)} 
 for more details.
 }
 \examples{
@@ -39,10 +39,9 @@ for ( k in 1:length(m.vec)){
 Omega.true.list  # a list of length 3 contains precision matrices from triangle graph
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{NeighborOmega}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

@@ -1,19 +1,19 @@
 #' Regression Parameter of Conditional Linear Model
 #'
-#' Compute regression parameter of conditional linear model of separable tensor normal distribution described in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+#' Compute regression parameter of conditional linear model of separable tensor normal distribution described in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 #'
 #' @param Omega.list list of precision matrices of tensor, i.e., \code{Omega.list[[k]]} is the kth precision matrix.
 #' Omega.list can be either true precision matrices or output of \code{Tlasso.fit}.   
 #' for the kth tensor mode, \eqn{k \in \{1 , \ldots, K\}}{ 1 <= k <= K }.   
-#' @param i index of interested regression parameter, default is 1. See details in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+#' @param i index of interested regression parameter, default is 1. See details in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 #' @param k index of interested mode, default is 1.
 #' 
 #' @details This function computes regression parameter and is fundamental for sample covariance of residuals and 
-#' bias correction. See details in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+#' bias correction. See details in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 #' 
 #' @return A vector of regression paramter.  
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{covres}}, \code{\link{biascor}}
 #'
 #' @examples

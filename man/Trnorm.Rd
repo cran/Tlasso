@@ -4,8 +4,16 @@
 \alias{Trnorm}
 \title{Separable Tensor Normal Distribution}
 \usage{
-Trnorm(n, m.vec, mu = array(0, m.vec), Sigma.list = NULL, type = "Chain",
-  sd = 1, knn = 4, norm.type = 2)
+Trnorm(
+  n,
+  m.vec,
+  mu = array(0, m.vec),
+  Sigma.list = NULL,
+  type = "Chain",
+  sd = 1,
+  knn = 4,
+  norm.type = 2
+)
 }
 \arguments{
 \item{n}{number of generated observations.}
@@ -47,10 +55,9 @@ DATA=Trnorm(n,m.vec,type='Chain')
 #         precision matrices from triangle graph
 
 }
-\author{
-Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng.
-}
 \seealso{
 \code{\link{ChainOmega}}, \code{\link{NeighborOmega}}
 }
-
+\author{
+Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng.
+}

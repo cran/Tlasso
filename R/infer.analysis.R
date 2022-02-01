@@ -25,7 +25,7 @@
 #' }
 #' 
 #' 
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{Tlasso.fit}}, \code{\link{est.analysis}}, \code{\link{ChainOmega}}
 #'
 #' @examples

@@ -1,6 +1,6 @@
 #' Precision Matrix of Triangle Graph
 #'
-#' Generate precision matrix of triangle graph (chain like network) following the set-up in \href{http://arxiv.org/abs/0908.2053}{Fan et al. (2009)}.
+#' Generate precision matrix of triangle graph (chain like network) following the set-up in \href{https://arxiv.org/abs/0908.2053}{Fan et al. (2009)}.
 #'
 #' @param p dimension of generated precision matrix.
 #' @param sd seed for random number generation, default is 1.
@@ -9,12 +9,12 @@
 #'
 #' @details This function first construct a covariance matrix \eqn{\Sigma}{\Sigma} that its (i,j) entry is 
 #' \eqn{\exp (- | h_i - h_j |/2)}{exp (- | h_i - h_j | / 2)} with \eqn{h_1 < h_2 < \ldots < h_p}{h_1 < h_2 < \ldots < h_p}.
-#' The difference \eqn{h_i - h_{i+1}}{h_i - h_{i+1}} is generated i.i.d. from Unif(0.5,1). See \href{http://arxiv.org/abs/0908.2053}{Fan et al. (2009)} 
+#' The difference \eqn{h_i - h_{i+1}}{h_i - h_{i+1}} is generated i.i.d. from Unif(0.5,1). See \href{https://arxiv.org/abs/0908.2053}{Fan et al. (2009)} 
 #' for more details.
 #' 
 #' @return A precision matrix generated from triangle graph.
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{NeighborOmega}}
 #'
 #' @examples

@@ -1,6 +1,6 @@
 #' Bias Correction of Sample Covariance of Residuals
 #'
-#' Generate a matrix of bias-corrected sample covariance of residuals (excludes diagnoal) described in \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)}.
+#' Generate a matrix of bias-corrected sample covariance of residuals (excludes diagnoal) described in \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)}.
 #'
 #' @param rho matrix of sample covariance of residuals (includes diagnoal), e.g., output of \code{\link{covres}}.    
 #' @param Omega.list list of precision matrices of tensor, i.e., \code{Omega.list[[k]]} is the precision matrix 
@@ -8,12 +8,12 @@
 #' @param k index of interested mode, default is 1. 
 #' 
 #' @details This function computes bias-corrected sample covariance of residuals (excludes diagnoal, diagnoal is zero vector). 
-#' Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details. 
+#' Note that output matrix excludes diagnoal while sample covariance of residuals includes diagnoal, see \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details. 
 #' Elements in \code{Omega.list} are true precision matrices or estimation of the true ones, the latter can be output of \code{\link{Tlasso.fit}}.
 #' 
-#' @return A matrix whose (i,j) entry (excludes diagnoal; diagnoal is zero vector) is bias-corrected sample covariance of the ith and jth residuals in the kth mode. See \href{http://arxiv.org/abs/1609.04522}{Sun et al. (2016)} for details.  
+#' @return A matrix whose (i,j) entry (excludes diagnoal; diagnoal is zero vector) is bias-corrected sample covariance of the ith and jth residuals in the kth mode. See \href{https://arxiv.org/abs/1609.04522}{Lyu et al. (2019)} for details.  
 #'
-#' @author Will Wei Sun, Zhaoran Wang, Xiang Lyu, Han Liu, Guang Cheng. 
+#' @author Xiang Lyu, Will Wei Sun, Zhaoran Wang, Han Liu, Jian Yang, Guang Cheng. 
 #' @seealso \code{\link{varcor}}, \code{\link{covres}}
 #'
 #' @examples
